@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_flutter/services/local_storage.dart';
 import 'package:news_app_flutter/source/authentication/view/login_view.dart';
+import 'package:news_app_flutter/source/news/cubit/news_cubit.dart';
 import 'package:news_app_flutter/source/news/view/home_view.dart';
 
 class SplashView extends StatelessWidget {
@@ -20,7 +22,10 @@ class SplashView extends StatelessWidget {
           splashDuration,
           () => Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => const HomeView(),
+              builder: (context) => BlocProvider(
+                create: (context) => NewsCubit()..getNewsResponse(),
+                child: const HomeView(),
+              ),
             ),
             (Route<dynamic> route) => false,
           ),

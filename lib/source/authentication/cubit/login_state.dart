@@ -28,8 +28,3 @@ class LoginState {
   }
 }
 
-enum Status {
-  loading,
-  loaded,
-  error,
-}

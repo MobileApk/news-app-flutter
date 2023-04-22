@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app_flutter/services/firebase_service/auth_service.dart';
+import 'package:news_app_flutter/services/firebase_service/abstract_auth_service.dart';
 import 'package:news_app_flutter/services/firebase_service/firebase_auth_service.dart';
 import 'package:news_app_flutter/services/local_storage.dart';
 import 'package:news_app_flutter/source/authentication/view/login_view.dart';
+import 'package:news_app_flutter/source/news/cubit/news_cubit.dart';
 import 'package:news_app_flutter/source/news/view/home_view.dart';
 import 'package:news_app_flutter/source/utils/app_helper.dart';
 
@@ -26,7 +27,6 @@ class LoginCubit extends Cubit<LoginState> {
   void updatePasswordText(String value) {
     emit(state.copyWith(passwordText: value));
   }
-
 
   validateUser(context) {
     emit(state.copyWith(status: Status.loading));
@@ -66,7 +66,12 @@ class LoginCubit extends Cubit<LoginState> {
       );
       appLocalStorage.saveLoginState(true);
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => const HomeView()),
+        MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => NewsCubit()..getNewsResponse(),
+            child: const HomeView(),
+          ),
+        ),
         (Route<dynamic> route) => false,
       );
       emit(state.copyWith(status: Status.loaded));
@@ -87,7 +92,10 @@ class LoginCubit extends Cubit<LoginState> {
       emit(state.copyWith(status: Status.loaded));
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
-          builder: (context) => const HomeView(),
+          builder: (context) => BlocProvider(
+            create: (context) => NewsCubit()..getNewsResponse(),
+            child: const HomeView(),
+          ),
         ),
         (Route<dynamic> route) => false,
       );

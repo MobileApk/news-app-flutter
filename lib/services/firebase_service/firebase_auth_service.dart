@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:news_app_flutter/services/firebase_service/auth_service.dart';
+import 'package:news_app_flutter/services/firebase_service/abstract_auth_service.dart';
 import 'package:news_app_flutter/services/firebase_service/firebase_auth_model.dart';
 
 class FirebaseAuthService implements AuthService {

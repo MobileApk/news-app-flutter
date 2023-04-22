@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_flutter/source/authentication/cubit/login_cubit.dart';
 import 'package:news_app_flutter/source/authentication/view/sign_up_view.dart';
+import 'package:news_app_flutter/source/utils/app_helper.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
