@@ -68,7 +68,6 @@ class LoginView extends StatelessWidget {
               const SizedBox(height: 30.0),
               TextButton(
                 onPressed: () {
-                  loginCubit.clearTextFields();
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const SignUpView(),

@@ -27,9 +27,6 @@ class LoginCubit extends Cubit<LoginState> {
     emit(state.copyWith(passwordText: value));
   }
 
-  void clearTextFields() {
-    emit(state.copyWith(passwordText: "", emailText: ""));
-  }
 
   validateUser(context) {
     emit(state.copyWith(status: Status.loading));
